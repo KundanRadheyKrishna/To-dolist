@@ -1,0 +1,77 @@
+
+let ADDbtn = document.getElementById("ADDbtn");
+let TASKin = document.getElementById("TASKin");
+let ul = document.querySelector("ul");
+
+document.addEventListener("DOMContentLoaded", UI);
+ADDbtn.addEventListener("click", addTask);
+
+// ADD TASK
+function addTask(e) {
+  e.preventDefault();
+
+  let taskText = TASKin.value.trim();
+  if (taskText === "") return alert("Write Any Task");
+
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.push({ text: taskText, completed: false });
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  TASKin.value = "";
+  UI();
+}
+
+// UI RENDER
+function UI() {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  ul.innerHTML = "";
+
+  tasks.forEach((taskObj, index) => {
+    let li = document.createElement("li");
+    li.className = "flex items-center justify-between bg-white px-4 py-2";
+
+    li.innerHTML = `
+      <span class="circle w-4 h-4 rounded-full cursor-pointer"></span>
+      <span class="text flex-1 mx-2 cursor-pointer">${taskObj.text}</span>
+      <button class="text-red-500 font-bold cursor-pointer">X</button>
+    `;
+
+    let circle = li.querySelector(".circle");
+    let text = li.querySelector(".text");
+    let delBtn = li.querySelector("button");
+
+    // APPLY SAVED STATE (reload fix)
+    if (taskObj.completed) {
+      text.style.textDecoration = "line-through";
+      text.style.color = "gray";
+      circle.style.backgroundColor = "green";
+    } else {
+      circle.style.backgroundColor = "#fbbf24"; // amber
+    }
+
+    // TOGGLE
+    circle.addEventListener("click", () => toggleTask(index));
+    text.addEventListener("click", () => toggleTask(index));
+
+    // DELETE
+    delBtn.addEventListener("click", () => deleteTask(index));
+
+    ul.appendChild(li);
+  });
+}
+
+// TOGGLE TASK (state localStorage me save)
+function toggleTask(index) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks[index].completed = !tasks[index].completed;
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  UI();
+}
+
+// DELETE TASK
+function deleteTask(index) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.splice(index, 1);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  UI();
+}

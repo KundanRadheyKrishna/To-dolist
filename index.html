@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link href="./output.css" rel="stylesheet">
+</head>
+
+<body class="bg-blue-600  ">
+
+    <div class="main flex items-center justify-center">
+        <div class="bg-amber-50 mt-20 p-3 min-h-\[200px\] rounded-md">
+            <h2 class="font-medium mb-2 ">To-Do List</h2>
+            <form class="flex overflow-hidden rounded-3xl bg-[#cfd2de]" action="">
+                <input id="TASKin" class="flex-1 px-4 py-2 text-black
+           focus:outline-none focus:ring-0 placeholder:text-sm" type="text" placeholder="Add your task" required
+                    autocomplete="off">
+                <button id="ADDbtn"
+                    class="px-6 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-tl-3xl rounded-bl-3xl"
+                    type="submit">Add</button>
+            </form>
+
+            <ul id="listcontainer" class="mt-4 space-y-2">
+                <!-- <li class="flex items-center justify-between bg-white px-4 py-2">
+                    <span class="w-4 h-4 bg-amber-400 rounded-full"></span>
+
+                    <span class="flex-1 mx-2">eCD HHJA</span>
+
+                    <button id="DLbtn"
+                        class="w-5 h-5 rounded-full flex items-center justify-center font-bold text-red-600 hover:bg-red-600 hover:text-white transition leading-none text-lg">
+                        X
+                    </button>btn
+
+                </li> -->
+
+            </ul>
+
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
